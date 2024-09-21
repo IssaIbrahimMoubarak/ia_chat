@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Chatbot</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2>AI Chatbot</h2>
+      </div>
+      <div id="chatbox" class="chat-box"></div>
+      <div class="input-area">
+        <input
+          type="text"
+          id="inputBox"
+          class="chat-input"
+          placeholder="Type your message here..."
+        />
+        <button id="sendButton" class="send-btn">Send</button>
+      </div>
+    </div>
+
+    <script>
+      const sendButton = document.getElementById("sendButton");
+      const inputBox = document.getElementById("inputBox");
+      const chatbox = document.getElementById("chatbox");
+
+      sendButton.addEventListener("click", function () {
+        const userMessage = inputBox.value;
+
+        if (userMessage.trim() === "") return; // Empêcher l'envoi de messages vides
+
+        // Ajouter le message utilisateur à l'interface
+        const userMessageDiv = document.createElement("div");
+        userMessageDiv.className = "user-message";
+        userMessageDiv.textContent = "You: " + userMessage;
+        chatbox.appendChild(userMessageDiv);
+
+        // Envoyer une requête POST au serveur Flask
+        fetch("/get", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: userMessage }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Ajouter la réponse du bot à l'interface
+            const botResponseDiv = document.createElement("div");
+            botResponseDiv.className = "bot-message";
+            botResponseDiv.textContent = "Bot: " + data.response;
+            chatbox.appendChild(botResponseDiv);
+
+            // Faire défiler le chat automatiquement vers le bas
+            chatbox.scrollTop = chatbox.scrollHeight;
+          });
+
+        // Vider la zone de saisie
+        inputBox.value = "";
+        chatbox.scrollTop = chatbox.scrollHeight;
+      });
+    </script>
+  </body>
+</html>
