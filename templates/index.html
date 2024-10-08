@@ -36,7 +36,7 @@
         // Ajouter le message utilisateur à l'interface
         const userMessageDiv = document.createElement("div");
         userMessageDiv.className = "user-message";
-        userMessageDiv.textContent = "You: " + userMessage;
+        userMessageDiv.textContent = userMessage;
         chatbox.appendChild(userMessageDiv);
 
         // Envoyer une requête POST au serveur Flask
@@ -52,7 +52,7 @@
             // Ajouter la réponse du bot à l'interface
             const botResponseDiv = document.createElement("div");
             botResponseDiv.className = "bot-message";
-            botResponseDiv.textContent = "Bot: " + data.response;
+            botResponseDiv.textContent = data.response;
             chatbox.appendChild(botResponseDiv);
 
             // Faire défiler le chat automatiquement vers le bas

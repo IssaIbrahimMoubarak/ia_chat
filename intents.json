@@ -79,10 +79,7 @@
           "What is special about ESCEP?"
         ],
         "responses": [
-          "ESCEP is the best IT school in Niamey.", 
-          "ESCEP stands for École Supérieure des Compétences en Programmation.", 
-          "ESCEP offers excellent programs in IT and computer science.", 
-          "Located in Niamey, ESCEP is known for its top-tier IT education."
+          "ESCEP is the best IT school, offering excellent programs in IT and computer science. Located in Niamey, ESCEP is renowned for its top-tier education in information technology."
         ],
         "context": [""]
       },
@@ -186,6 +183,26 @@
           "Here's a fun fact: The first computer virus was created in 1983!", 
           "Did you know that over 90% of the world's data was generated in the last two years?", 
           "Here's an interesting one: The first 1 GB hard drive, introduced in 1980, weighed over 500 pounds!"
+        ],
+        "context": [""]
+      },
+      {
+        "tag": "friend_one",
+        "patterns": [
+          "Hi, who is imrane yaye ?"
+        ],
+        "responses": [
+          "Imrane Yaye is the delegate of the Artificial Intelligence section at ESCEP and is also the villain."
+        ],
+        "context": [""]
+      },
+      {
+        "tag": "friend_two",
+        "patterns": [
+          "Hi, who is moubarak ?"
+        ],
+        "responses": [
+          "Moubarak is the best student at ESCEP; he comes to school every day. He is a wonderful person."
         ],
         "context": [""]
       }
