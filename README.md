@@ -1,12 +1,13 @@
-# IA Chatbot with TensorFlow/Keras
+# IA Chatbot avec TensorFlow/Keras et Streamlit
 
-Ce projet est un chatbot basé sur Python, TensorFlow et Keras, qui utilise des intentions définies dans un fichier JSON (`intents.json`). Le modèle est capable de répondre à des questions en fonction des intentions et des motifs de requêtes ajoutés au fichier JSON. Ce chatbot est conçu pour réentraîner automatiquement son modèle à partir des nouvelles données ajoutées quotidiennement au fichier `intents.json`.
+Ce projet chatbot basé sur TensorFlow et Keras, utilise des intentions définies dans un fichier JSON (`intents.json`). Ce modèle est capable de répondre à des questions en fonction des intentions et des motifs de requêtes ajoutés au fichier JSON. Ce chatbot est conçu pour réentraîner automatiquement son modèle à partir des nouvelles données ajoutées quotidiennement au fichier `intents.json`.
 
 ## Fonctionnalités
 
-- **Apprentissage des intentions** : Le chatbot est entraîné pour répondre à des questions sur la base d'un ensemble d'intentions pré-définies.
+- **Apprentissage des intentions** : Le chatbot est entraîné pour répondre à des questions sur la base d'un ensemble d'intentions pré-définies dans intents.json
 - **Réentraînement quotidien** : Le modèle est automatiquement mis à jour et réentraîné pour inclure de nouvelles données ajoutées à `intents.json` chaque jour.
 - **Traitement du Langage Naturel (NLP)** : Utilisation de la tokenisation, de la lemmatisation et du bag of words pour le traitement des entrées utilisateur.
+- **Interface interactive** : Utilisation de Streamlit pour créer une interface utilisateur simple et interactive où l'utilisateur peut poser des questions et obtenir des réponses instantanées.
 
 ## Structure du projet
 
@@ -17,6 +18,7 @@ Voici un aperçu des principaux fichiers du projet :
 - `words.pkl` : Les mots utilisés dans les motifs, après le processus de lemmatisation et de nettoyage.
 - `classes.pkl` : Les classes (ou intentions) extraites du fichier `intents.json`.
 - `chatbot.py` : Le fichier principal contenant le code pour le fonctionnement du chatbot, y compris le réentraînement quotidien.
+- `app.py` : Le fichier pour lancer l'application Streamlit et interagir avec le chatbot.
 
 ## Prérequis
 
@@ -28,11 +30,12 @@ Avant de lancer le projet, assurez-vous d'avoir les dépendances suivantes insta
 - NumPy
 - NLTK
 - Pickle
+- Streamlit
 
 Vous pouvez installer les dépendances avec la commande suivante :
 
 ```bash
-pip install tensorflow keras numpy nltk pickle-mixin
+pip install tensorflow keras numpy nltk pickle-mixin streamlit
 ```
 
 ## Description des étapes
@@ -58,6 +61,10 @@ Lorsque l'utilisateur interagit avec le chatbot, les étapes suivantes sont effe
 - Le modèle prédit l'intention la plus probable de la phrase.
 - Le chatbot génère une réponse en sélectionnant une réponse aléatoire associée à l'intention prédite.
 
+### 4. Interface utilisateur avec Streamlit
+
+L'interface utilisateur est développée avec Streamlit, où l'utilisateur peut poser des questions et obtenir des réponses instantanées. Les questions et réponses sont affichées dans des bulles de texte colorées (verte pour la question, bleue pour la réponse du chatbot).
+
 ## Exemple de code pour réentraîner le modèle
 
 Voici un extrait de code pour réentraîner le modèle chaque jour avec les nouvelles données ajoutées au fichier `intents.json` :
@@ -74,7 +81,7 @@ from tensorflow.keras.optimizers import SGD
 lemmatizer = WordNetLemmatizer()
 
 # Charger les nouvelles données intents.json
-with open('../intents.json') as file:
+with open('intents.json') as file:
     intents = json.load(file)
 
 # Initialisation des listes
@@ -145,14 +152,12 @@ model.save('chatbot_model.h5')
 print("Réentraînement terminé et modèle sauvegardé.")
 ```
 
-## Lancement du projet
+## Lancement du projet avec Streamlit
 
-Pour lancer le chatbot, exécutez simplement le fichier Python `app`
-
- :
+Pour lancer l'application et interagir avec le chatbot via l'interface Streamlit, exécutez le fichier `app.py` :
 
 ```bash
-python app.py
+streamlit run app.py
 ```
 
-Le chatbot commencera à répondre aux questions en fonction des intentions définies dans `intents.json`.
+L'application Streamlit se lancera dans votre navigateur, vous permettant de poser des questions et d'obtenir des réponses instantanées avec l'interface interactive.
